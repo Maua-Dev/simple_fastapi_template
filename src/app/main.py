@@ -3,7 +3,7 @@ from mangum import Mangum
 
 app = FastAPI()
 
-# TODO: Implement my logic here to handle the requests from Battlesnake
+# TODO: Implement my logic here to handle the requests from SimpleFastAPI
 
 @app.get("/")
 def read_root():

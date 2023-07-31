@@ -1,14 +1,11 @@
-# battlesnake_fastapi_template 🐍
+# simple_fastapi_template ⏩
 
-This is a [Battlesnake](http://play.battlesnake.com) template written in Python using the [FastAPI](https://fastapi.tiangolo.com/) framework and deployed in AWS Lambda using [Mangum](https://mangum.io).
+This is a microservice template written in Python using the [FastAPI](https://fastapi.tiangolo.com/) framework and deployed in AWS Lambda using [Mangum](https://mangum.io).
 
 ## Introduction and Objectives ⁉
-The main purpose of this project is to create a template for Battlesnake using FastAPI and Mangum. The biggest challenge is to understand how an API works and how to deploy it in AWS Lambda.
-
-![Example](https://github.com/Maua-Dev/battlesnake_fastapi_template/assets/81604963/58080c12-6d91-4366-b4e0-f7cd9f20f98d)
-
+The main objective is to provide a template for repositories that can be used as a starting point for new projects. This architecture is based on the Clean Architecture, and it was based in many other projects and books, articles that were mixed by the students of Mauá Institute of Technology, from the academic group Dev. Community Mauá.
 ## How to use 🤔
-First of all, you need to create a repo using issues from [Devmaua setup](https://github.com/Maua-Dev/devmaua_setup/), set the **project_name** as "**battlesnake_{your name}**" and project template as **battlesnake_fastapi_template** and make sure it's **public** . Hit create issue and wait for the setup to finish.
+First of all, you need to create a repo using issues from [Devmaua setup](https://github.com/Maua-Dev/devmaua_setup/), set the **project_name** as you prefer and project template as **simple_fastapi_template** and make sure it's **public** . Hit create issue and wait for the setup to finish.
 
 After that you need to clone your new repo, create a virtual environment and install the requirements.
 
@@ -47,20 +44,8 @@ After that you need to clone your new repo, create a virtual environment and ins
 
     uvicorn src.app.main:app
 
-## The Challenge 🐍
-The challenge is to create a Battlesnake using FastAPI and Mangum. The Battlesnake must be deployed in AWS Lambda.
-You can find the documentation for Battlesnake [here](https://docs.battlesnake.com/).
-
-### The files 📁
-The project is divided in 2 folders: **src** and **tests**.
-In src you can find the main.py file, which is the file that contains the FastAPI app and the routes. From there you can create your own routes and functions.
-The tests folder contains the tests for the project. You can create your own tests and run them using pytest.
-
-### The routes 🛣
-The routes are created in **main.py** file. You can create your own routes and functions. The routes are created using FastAPI decorators, you can find the documentation [here](https://fastapi.tiangolo.com/tutorial/first-steps/). Follow the rules from Battlesnake documentation to create your routes, they should look like [this](https://docs.battlesnake.com/api).
-
 ### Atention 🚨
-In order to deploy your Battlesnake in AWS Lambda, you need to follow some rules:
+In order to deploy your microservice in AWS Lambda, you need to follow some rules:
 - The routes must be created using FastAPI decorators;
 - Don't use complete import, only relative ones. (eg: from .move_function import move);
 - ALWAYS test your code before pushing it to the repo. You can use pytest to test your code;
@@ -70,8 +55,7 @@ In order to deploy your Battlesnake in AWS Lambda, you need to follow some rules
 
 ### Deploy 🚀
 
-![FastApi AWS drawio](https://github.com/Maua-Dev/battlesnake_fastapi_template/assets/81604963/68026cf1-14de-4ca9-bd50-61688556b581)
-
+### \<FAST API DRAW IO\>
 
 After pushing your code to the repo, it will trigger an action to deploy your code in AWS Lambda. You can find the action in the **.github/workflows/aws_cd.yml** file.
 
@@ -104,7 +88,6 @@ After finishing your project, you can delete it from our backend using our CD.
 - [Postman](https://www.postman.com/) - API development environment
 - [FastAPI](https://fastapi.tiangolo.com/) - Web framework
 - [Python3.9](https://docs.python.org/3.9/) - Python Documentation
-- [Battlesnake](https://docs.battlesnake.com/) - Battlesnake Documentation
 
 ## Thanks 👢🍿
 

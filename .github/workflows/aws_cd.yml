@@ -1,9 +1,9 @@
 name: AWS CD
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - dev
+#   push:
+#     branches:
+#       - dev
 jobs:
   DeployToAWS:
     environment: 
@@ -27,10 +27,10 @@ jobs:
             echo "STAGE=${{ github.ref_name }}" 
             PROJECT_NAME=$(echo ${{ github.event.repository.name }} | sed -e 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++)sub(/./,toupper(substr($i,1,1)),$i)}1' | sed -e 's/ //g')
             echo "PROJECT_NAME=${PROJECT_NAME}"
-            echo "STACK_NAME=${PROJECT_NAME}StackBattlesnake${{github.ref_name}}"
+            echo "STACK_NAME=${PROJECT_NAME}StackSimpleFastAPI${{github.ref_name}}"
 
-            echo "STACK_NAME=${PROJECT_NAME}StackBattlesnake${{github.ref_name}}" >> $GITHUB_ENV
-            echo "PROJECT_NAME=${PROJECT_NAME}Battlesnake" >> $GITHUB_ENV
+            echo "STACK_NAME=${PROJECT_NAME}StackSimpleFastAPI${{github.ref_name}}" >> $GITHUB_ENV
+            echo "PROJECT_NAME=${PROJECT_NAME}SimpleFastAPI" >> $GITHUB_ENV
 
         - uses: actions/setup-python@v4
           with:
@@ -42,7 +42,7 @@ jobs:
             cd iac
             pip install -r requirements.txt
 
-        - name: Installing Dependencies to BattleSnake
+        - name: Installing Dependencies to SimpleFastAPI
           run: |
             pip install -t src -r requirements.txt
 
