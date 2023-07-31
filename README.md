@@ -55,7 +55,8 @@ In order to deploy your microservice in AWS Lambda, you need to follow some rule
 
 ### Deploy 🚀
 
-### \<FAST API DRAW IO\>
+![FastAPI DrawIO](https://github.com/Maua-Dev/simple_fastapi_template/assets/85962841/d7e0f17a-b583-4594-b0f5-d7bce0a46d44)
+
 
 After pushing your code to the repo, it will trigger an action to deploy your code in AWS Lambda. You can find the action in the **.github/workflows/aws_cd.yml** file.
 
@@ -63,25 +64,24 @@ In the first time you push your code, the action will create a new stack in AWS 
 
 In the [Actions](https://github.com/Maua-Dev/battlesnake_fastapi_template/actions) tab you can see the status of the deploy, and if it was successful or not. If it was successful, you can find the URL of your API in the outputs tab of the action (in the final part of the "Deploy with CDK" step).
 
-
-![Action Tab](https://github.com/Maua-Dev/battlesnake_fastapi_template/assets/81604963/ca447b23-e4f3-423c-8ba2-3f7c891849c9)
-![CD](https://github.com/Maua-Dev/battlesnake_fastapi_template/assets/81604963/1340c269-f182-46eb-ae12-1d0bdd6059a2)
-![STEP](https://github.com/Maua-Dev/battlesnake_fastapi_template/assets/81604963/6129f465-a54d-46fc-b45a-c8b219a6823b)
+![Action Tab](https://github.com/Maua-Dev/simple_fastapi_template/assets/85962841/e7735f61-1fe5-4a6b-9e04-b5159a94f4f7)
+![CD](https://github.com/Maua-Dev/simple_fastapi_template/assets/85962841/9a4174b3-50c2-4114-aa57-101f8670de84)
+![STEP](https://github.com/Maua-Dev/simple_fastapi_template/assets/85962841/c5707f59-6e3c-44c1-8939-446c22b65fd0)
 
 There you can find your API URL. You can use this URL to create your Battlesnake in the Battlesnake website. You can find the documentation [here](https://docs.battlesnake.com/guides/getting-started#step-2-create-a-battlesnake).
 You can also find an user and password to access the AWS Console and view the logs of the lambda function to debug it.
 
-![Outputs](https://github.com/Maua-Dev/battlesnake_fastapi_template/assets/81604963/e06bf1dd-18cc-4057-91ea-3ccd8074848f)
+![Outputs](https://github.com/Maua-Dev/simple_fastapi_template/assets/85962841/1ff2846c-f4f0-4547-b23f-225466e604ec)
 
 
 To login in the AWS Console, click in the link name "console" on the output, and then click in "Sign in to a different account". There you need to put the account id and the user and password from the outputs tab. On your login you are required to change your password, DON'T FORGET THE NEW ONE. After that you can click in the link to lambda console, and click monitor to find the logs.
 
-![Lambda Console](https://github.com/Maua-Dev/battlesnake_fastapi_template/assets/81604963/8a584df8-9efe-432d-9083-6f3523b7f58c)
-![Cloudwatch Logs](https://github.com/Maua-Dev/battlesnake_fastapi_template/assets/81604963/94483cd1-ae3c-46c0-86df-d8fff0b0490e)
+![Lambda Console](https://github.com/Maua-Dev/simple_fastapi_template/assets/85962841/5851eab1-4897-4877-9b39-42012e7cb14a)
+![Cloudwatch Logs](https://github.com/Maua-Dev/simple_fastapi_template/assets/85962841/0350ba37-3714-4dc0-a29e-e1671a6d30eb)
 
 After finishing your project, you can delete it from our backend using our CD.
 
-![AwsDestroy](https://github.com/Maua-Dev/battlesnake_fastapi_template/assets/81604963/68a73993-c55e-4ba8-8bf9-2becbc9decf6)
+![AwsDestroy](https://github.com/Maua-Dev/simple_fastapi_template/assets/85962841/46ea3d88-c3a7-45e6-adf7-01a0ccccbef3)
 
 ## Useful tools 🛠
 
