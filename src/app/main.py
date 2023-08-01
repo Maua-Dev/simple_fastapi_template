@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from mangum import Mangum
 
-from .entities.test_entitie import Entidade
 
 app = FastAPI()
 
@@ -9,7 +8,6 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    Entidade.print()
     return {"Hello": "World"}
 
 @app.get("/items/{item_id}")
