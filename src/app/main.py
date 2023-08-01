@@ -17,7 +17,7 @@ items = {
     4: Item(name="Super Mario Bros", price=55.00, item_type=ItemTypeEnum.GAMES, admin_permission=True)
 }
 
-# TODO: Implement my logic here to handle the requests from SimpleFastAPI
+# TODO: Implement my logic here to handle the requests
 
 @app.get("/items/get_all_items")
 def get_all_items():
