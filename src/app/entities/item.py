@@ -66,10 +66,13 @@ class Item:
             return (False, "Admin permission must be a boolean")
         return (True, "")
         
-    
-    def __dict__(self):
+    def to_dict(self):
         return {
             "name": self.name,
             "price": self.price,
-            "item_type": self.item_type.value
+            "item_type": self.item_type.value,
+            "admin_permission": self.admin_permission
         }
+    
+    def __eq__(self,other):
+        return self.name == other.name and self.price == other.price and self.item_type == other.item_type and self.admin_permission == other.admin_permission

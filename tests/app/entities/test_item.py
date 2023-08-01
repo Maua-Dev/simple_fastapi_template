@@ -10,6 +10,10 @@ class Test_Item:
         assert item.name == "test"
         assert item.price == 1.0
         assert item.item_type == ItemTypeEnum.FOOD
+        
+    def test_item_dict(self):
+        item = Item("test", 1.0, ItemTypeEnum.FOOD, admin_permission=True)
+        assert item.to_dict() == {'admin_permission': True, 'item_type': 'FOOD', 'name': 'test', 'price': 1.0}
     
     def test_item_name_is_none(self):
         with pytest.raises(ParamNotValidated):
