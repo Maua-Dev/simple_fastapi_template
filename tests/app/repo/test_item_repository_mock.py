@@ -41,3 +41,27 @@ class Test_ItemRepositoryMock:
         repo = ItemRepositoryMock()
         item = repo.delete_item(item_id=10)
         assert item is None
+        
+    def test_update_item(self):
+        repo = ItemRepositoryMock()
+        item = Item(name="test", price=1.0, item_type=ItemTypeEnum.TOY, admin_permission=False)
+        item_updated = repo.update_item(item_id=1, name=item.name, price=item.price, item_type=item.item_type, admin_permission=item.admin_permission)
+        
+        assert item_updated == item
+        assert repo.items.get(1) == item
+        
+    def test_update_item_partial_1(self):
+        repo = ItemRepositoryMock()
+        name = "test"
+        item_updated = repo.update_item(item_id=1, name=name)
+        
+        assert item_updated.name == name
+        assert repo.items.get(1).name == name
+        
+    def test_update_item_partial_2(self):
+        repo = ItemRepositoryMock()
+        price = 1.0
+        item_updated = repo.update_item(item_id=1, price=price)
+        
+        assert item_updated.price == price
+        assert repo.items.get(1).price == price

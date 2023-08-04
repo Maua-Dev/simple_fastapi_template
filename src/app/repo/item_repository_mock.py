@@ -31,11 +31,22 @@ class ItemRepositoryMock(IItemRepository):
         return item
         
         
-    def update_item(self, item_id: int, item: Item) -> Item:
-        '''
-        Updates the item with the given id.
-        If the item does not exist, returns None
-        '''
-        pass
+    def update_item(self, item_id:int, name:str=None, price:float=None, item_type:ItemTypeEnum=None, admin_permission:bool=None) -> Item:
+        item = self.items.get(item_id, None)
+        if item is None:
+            return None
+        
+        if name is not None:
+            item.name = name
+        if price is not None:
+            item.price = price
+        if item_type is not None:
+            item.item_type = item_type
+        if admin_permission is not None:
+            item.admin_permission = admin_permission
+        self.items[item_id] = item
+        
+        return item
+        
     
     

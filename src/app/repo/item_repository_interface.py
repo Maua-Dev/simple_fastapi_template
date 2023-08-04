@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import List, Optional, Tuple
 
+from ..enums.item_type_enum import ItemTypeEnum
+
 from ..entities.item import Item
 
 
@@ -37,7 +39,7 @@ class IItemRepository(ABC):
         '''
         
     @abstractmethod
-    def update_item(self, item_id: int, item: Item) -> Item:
+    def update_item(self, item_id:int, name:str=None, price:float=None, item_type:ItemTypeEnum=None, admin_permission:bool=None) -> Item:
         '''
         Updates the item with the given id.
         If the item does not exist, returns None

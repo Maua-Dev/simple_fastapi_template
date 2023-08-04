@@ -76,3 +76,6 @@ class Item:
     
     def __eq__(self,other):
         return self.name == other.name and self.price == other.price and self.item_type == other.item_type and self.admin_permission == other.admin_permission
+    
+    def __repr__(self):
+        return f"Item(name={self.name}, price={self.price}, item_type={self.item_type}, admin_permission={self.admin_permission})"
