@@ -25,4 +25,19 @@ class Test_ItemRepositoryMock:
         repo.create_item(item=item, item_id=0)
         len_after = len(repo.items)
         assert len_after == len_before + 1
-        assert repo.items.get(0) == item    
+        assert repo.items.get(0) == item
+        
+    def test_delete_item(self):
+        repo = ItemRepositoryMock()
+        item_expected_to_be_deleted = repo.items.get(1)
+        len_before = len(repo.items)
+        
+        item = repo.delete_item(item_id=1)
+        len_after = len(repo.items)
+        assert len_after == len_before - 1
+        assert item == item_expected_to_be_deleted
+        
+    def test_delete_item_not_found(self):
+        repo = ItemRepositoryMock()
+        item = repo.delete_item(item_id=10)
+        assert item is None

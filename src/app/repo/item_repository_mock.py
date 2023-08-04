@@ -27,10 +27,9 @@ class ItemRepositoryMock(IItemRepository):
         return item
     
     def delete_item(self, item_id: int) -> Item:
-        '''
-        Deletes the item with the given id.
-        If the item does not exist, returns None
-        '''
+        item = self.items.pop(item_id, None)
+        return item
+        
         
     def update_item(self, item_id: int, item: Item) -> Item:
         '''
