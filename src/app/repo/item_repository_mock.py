@@ -23,10 +23,8 @@ class ItemRepositoryMock(IItemRepository):
         return self.items.get(item_id, None)
     
     def create_item(self, item: Item, item_id: int) -> Item:
-        '''
-        Creates a new item in the database
-        '''
-        pass
+        self.items[item_id] = item
+        return item
     
     def delete_item(self, item_id: int) -> Item:
         '''
