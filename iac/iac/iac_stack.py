@@ -27,6 +27,7 @@ class IacStack(Stack):
             "SimpleFastAPILambda",
             runtime=_lambda.Runtime.PYTHON_3_9,
             code=_lambda.Code.from_asset("../src"),
+            environment={"STAGE":"TEST"},
             handler="app.main.handler",
             timeout=Duration.seconds(15),
         )
