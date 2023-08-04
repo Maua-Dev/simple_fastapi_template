@@ -9,7 +9,7 @@ class Test_Main:
     def test_get_all_items(self):
         repo = ItemRepositoryMock()
         response = get_all_items()
-        assert all([item_expect == item for item_expect, item in zip(repo.items.values(), response)]) 
+        assert all([item_expect.to_dict() == item for item_expect, item in zip(repo.items.values(), response.get("items"))]) 
         
     def test_get_item(self):
         repo = ItemRepositoryMock()

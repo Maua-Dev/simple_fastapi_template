@@ -18,7 +18,10 @@ repo = Environments.get_item_repo()()
 
 @app.get("/items/get_all_items")
 def get_all_items():
-    return repo.get_all_items()
+    items = repo.get_all_items()
+    return {
+        "items": [item.to_dict() for item in items]
+    }
 
 @app.get("/items/{item_id}")
 def get_item(item_id: int):
