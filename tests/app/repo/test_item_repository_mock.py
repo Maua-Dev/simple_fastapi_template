@@ -8,4 +8,12 @@ class Test_ItemRepositoryMock:
         repo = ItemRepositoryMock()
         assert all([item_expect == item for item_expect, item in zip(repo.items.values(), repo.get_all_items())]) 
         
+    def test_get_item(self):
+        repo = ItemRepositoryMock()
+        item = repo.get_item(item_id=1)
+        assert item == repo.items.get(1)
     
+    def test_get_item_not_found(self):
+        repo = ItemRepositoryMock()
+        item = repo.get_item(item_id=10)
+        assert item is None    

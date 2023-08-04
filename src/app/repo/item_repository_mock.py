@@ -20,11 +20,7 @@ class ItemRepositoryMock(IItemRepository):
         return self.items.values()
     
     def get_item(self, item_id: int) -> Optional[Item]:
-        '''
-        Returns the item with the given id.
-        If the item does not exist, returns None
-        '''
-        pass
+        return self.items.get(item_id, None)
     
     def create_item(self, item: Item, item_id: int) -> Item:
         '''
