@@ -44,6 +44,10 @@ After that you need to clone your new repo, create a virtual environment and ins
 
     uvicorn src.app.main:app
 
+#### If you want to access the FAST API interface to interact with the API, you can access the following URL:
+
+    http://localhost:8000/docs
+
 ### Atention 🚨
 In order to deploy your microservice in AWS Lambda, you need to follow some rules:
 - The routes must be created using FastAPI decorators;
