@@ -31,7 +31,7 @@ class Item:
         self.admin_permission = admin_permission
         
     @staticmethod
-    def validate_name(name: str) -> Tuple[float, str]:
+    def validate_name(name: str) -> Tuple[bool, str]:
         if name is None:
             return (False, "Name is required")
         if type(name) != str:
@@ -41,7 +41,7 @@ class Item:
         return (True, "")
         
     @staticmethod
-    def validate_price(price: float) -> Tuple[float, str]:
+    def validate_price(price: float) -> Tuple[bool, str]:
         if price is None:
             return (False, "Price is required")
         if type(price) != float:
@@ -51,7 +51,7 @@ class Item:
         return (True, "")
     
     @staticmethod
-    def validate_item_type(item_type: ItemTypeEnum) -> Tuple[float, str]:
+    def validate_item_type(item_type: ItemTypeEnum) -> Tuple[bool, str]:
         if item_type is None:
             return (False, "Item type is required")
         if type(item_type) != ItemTypeEnum:
@@ -59,12 +59,26 @@ class Item:
         return (True, "")
     
     @staticmethod
-    def validate_admin_permission(admin_permission: bool) -> Tuple[float, str]:
+    def validate_admin_permission(admin_permission: bool) -> Tuple[bool, str]:
         if admin_permission is None:
             return (False, "Admin permission is required")
         if type(admin_permission) != bool:
             return (False, "Admin permission must be a boolean")
         return (True, "")
+        
+    @staticmethod
+    def validate_item_id(item_id: int) -> Tuple[bool, str]:
+        if item_id is None:
+            return (False, "Missing 'item_id' parameter")
+
+        if type(item_id) != int:
+            return (False, "Parameter 'item_id' must be an integer")
+        
+        if item_id < 0:
+            return (False, "Parameter 'item_id' must be a positive integer")
+
+        return (True, "")
+    
         
     def to_dict(self):
         return {
