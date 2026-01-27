@@ -162,7 +162,7 @@ class IacStack(Stack):
         cleanup_lambda.grant_invoke(scheduler_role)
         
         # Calculate the deletion time (90 days from now)
-        deletion_time = datetime.now(tz=timezone.utc) + timedelta(minutes=5)
+        deletion_time = datetime.now(tz=timezone.utc) + timedelta(days=90)
         # Convert to GMT-3
         deletion_time_gmt3 = deletion_time.astimezone(ZoneInfo("America/Sao_Paulo"))
         # Format as ISO 8601: yyyy-MM-ddTHH:mm:ss
