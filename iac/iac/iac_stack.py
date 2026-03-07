@@ -29,7 +29,7 @@ class IacStack(Stack):
         lambda_fn = _lambda.Function(
             self,
             "SimpleFastAPILambda",
-            runtime=_lambda.Runtime.PYTHON_3_9,
+            runtime=_lambda.Runtime.PYTHON_3_13,
             code=_lambda.Code.from_asset("../src"),
             environment={"STAGE":"TEST"},
             handler="app.main.handler",
@@ -141,7 +141,7 @@ class IacStack(Stack):
         cleanup_lambda = _lambda.Function(
             self,
             "CleanupStackLambda-" + self.stack_name,
-            runtime=_lambda.Runtime.PYTHON_3_9,
+            runtime=_lambda.Runtime.PYTHON_3_13,
             code=_lambda.Code.from_asset("functions"),
             handler="cleanup_stack.handler",
             timeout=Duration.minutes(5),

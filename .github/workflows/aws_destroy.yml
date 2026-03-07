@@ -18,9 +18,9 @@ jobs:
             role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GithubActionsRole
             role-session-name: github-action
 
-        - uses: actions/setup-python@v4
+        - uses: actions/setup-python@v5
           with:
-            python-version: '3.9'
+            python-version: '3.13'
 
         - name: Setting stage and stack name
           run: |

@@ -19,7 +19,7 @@ After that you need to clone your new repo, create a virtual environment and ins
 
 ###### Linux
 
-    virtualenv -p python3.9 venv
+    virtualenv -p python3.13 venv
 
 #### Activate the venv
 
@@ -90,7 +90,7 @@ After finishing your project, you can delete it from our backend using our CD.
 
 - [Postman](https://www.postman.com/) - API development environment
 - [FastAPI](https://fastapi.tiangolo.com/) - Web framework
-- [Python3.9](https://docs.python.org/3.9/) - Python Documentation
+- [Python3.13](https://docs.python.org/3.13/) - Python Documentation
 
 ## Thanks 👢🍿
 
