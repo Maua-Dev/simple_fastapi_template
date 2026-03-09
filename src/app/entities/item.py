@@ -6,6 +6,9 @@ from ..enums.item_type_enum import ItemTypeEnum
 
 
 class Item:
+    
+    # atributos da entidade
+    
     item_id: str
     name: str
     price: float
@@ -13,6 +16,9 @@ class Item:
     admin_permission: bool
     
     def __init__(
+        
+        # argumentos da função 
+        
         self, 
         item_id: str = None,
         name: str = None, 
@@ -20,9 +26,35 @@ class Item:
         item_type: ItemTypeEnum = None,
         admin_permission: bool = False # o default colocamos dessa forma
     ):
+        
+        # método construtor da entidade. Pense nisso como uma função que executa toda vez que voce instancia a classe.
+        # Ex: meu_item = Item( *argumentos que voce pediu na chamada* ) -> executa a logica dentro de __init__ e pede pelos argumentos
+        # passados na função (item_id, name, price, item_type, admin_permission). DETALHE: esses argumentos pedidos NÃO são os atributos da entidade.
+        # voce poderia modelar a função init para pedir apenas por name, price, item_type e admin_permission, por exemplo, e gerar um id aleatório dentro
+        # do proprio init.
+        
+        ##
+        
+        # a seguir temos o fluxo validação dos parâmetros da entidade. o python por natureza não é uma linguagem estritamente tipada.
+        # isso significa que mesmo voce definindo nos argumentos da função E nos atributos da entidade, voce poderia livremente atribuir um int ao item_id
+        # sem o python te barrar.
+        # os métodos de validação servem para restringir nossa entidade às devidas regras de negócio. o validation_item_id, por exemplo, valida se o item_id
+        # esta dentro das regras esperadas e determinadas pela nossa aplicação. seguindo no mesmo exemplo, ele precisa ser uma string, no formato UUID e não nulo.
+        # segure ctrl + click esquerdo na função validate_item_id ou vá para a linha 86 - a lógica de validação do item_id está la.
+        
         validation_item_id = self.validate_item_id(item_id)
         if validation_item_id[0] is False:
+            
+            # esse bloco raise levanta um erro (para um escopo acima de execução, por exemplo no arquivo (código) que está chamando a entidade)
+            # posteriormente esse erro pode ser capturado (except) no proprio escopo ou em um acima para direcionar o código
+            
             raise ParamNotValidated("item_id", validation_item_id[1])
+        
+        # após passar da validação (e não levantar nenhum erro), atribuimos um atributo da entidade ao valor passado como argumento no init
+        # nosso item agora possuí um atributo item_id, que podemos acessar por item.item_id
+        # antes dessa atribuição (a baixo) o valor item_id é apenas um argumento recebido pela função init e não "persiste" no nosso item. isso significa que
+        # depois que a função init terminar de executar seu cógio, caso não tivessemos a linha 58, a entidade não teria um item_id definido
+        
         self.item_id = item_id
         
         validation_name = self.validate_name(name)
@@ -44,6 +76,11 @@ class Item:
         if validation_admin_permission[0] is False:
             raise ParamNotValidated("admin_permission", validation_admin_permission[1])
         self.admin_permission = admin_permission
+        
+    # definição dos métodos de validação
+    # os @ antes das funções ou qualquer bloco de código se chamam Decorators.
+    # esse em específico, @staticmethod, nos permite chamar esses métodos "de fora" da entidade. Exemplo: não criamos um item ainda, porém podemos rodar um
+    # (nome da classe)Item.validate_item_id("123321") - note que a chamada Item não é atribuída a uma entidade, mas sim à classe Item.
         
     @staticmethod
     def validate_item_id(item_id: str) -> Tuple[bool, str]:
