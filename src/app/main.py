@@ -73,7 +73,9 @@ def create_item(request: dict):
             item_id=item_id,
             name=name,
             price=price,
-            item_type=ItemTypeEnum[item_type],
+            item_type=ItemTypeEnum[item_type], 
+            # bate a string que veio na request com todos os .values dentro do enum ItemTypeEnum.
+            # ou seja, se vier uma string TOY ele vai converter para ItemTypeEnum.TOY
             admin_permission=admin_permission,
         )
     except ParamNotValidated as err:

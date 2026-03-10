@@ -86,6 +86,52 @@ After finishing your project, you can delete it from our backend using our CD.
 
 ![AwsDestroy](https://github.com/Maua-Dev/simple_fastapi_template/assets/85962841/46ea3d88-c3a7-45e6-adf7-01a0ccccbef3)
 
+## LocalStack - API Gateway + Lambda Local 🐳
+
+You can test the full API Gateway + Lambda integration locally using [LocalStack](https://localstack.cloud/) (free/Community edition).
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) and Docker Compose installed
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed
+- `awscli-local` installed (already in `requirements-dev.txt`):
+
+      pip install -r requirements-dev.txt
+
+### Usage
+
+**1. Start LocalStack:**
+
+    docker compose up -d
+
+**2. Deploy Lambda + API Gateway to LocalStack:**
+
+    bash iac/localstack/deploy.sh
+
+The script will package the application code, create a Lambda function, set up a REST API Gateway with proxy integration, and print the base URL for testing.
+
+**3. Test the endpoints:**
+
+    curl http://localhost:4566/restapis/<api-id>/local/_user_request_/items/get_all_items
+
+The exact URL (with the API ID) is printed at the end of the deploy script output.
+
+**4. Teardown (optional):**
+
+    bash iac/localstack/teardown.sh
+
+**5. Stop LocalStack:**
+
+    docker compose down
+
+### Architecture (LocalStack)
+
+In production, the Lambda is exposed via Lambda Function URL. Locally, LocalStack free does not support Function URLs, so we use **REST API Gateway (v1)** with a Lambda Proxy Integration instead. The request flow is:
+
+    Client → API Gateway REST (localhost:4566) → Lambda (Mangum) → FastAPI
+
+The Lambda environment variable `STAGE=TEST` uses `ItemRepositoryMock` (in-memory data).
+
 ## Useful tools 🛠
 
 - [Postman](https://www.postman.com/) - API development environment
