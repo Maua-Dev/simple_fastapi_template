@@ -4,12 +4,20 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$SCRIPT_DIR/../.."
 
+ENV_FILE="$PROJECT_ROOT/.env"
+if [ -f "$ENV_FILE" ]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "$ENV_FILE"
+  set +a
+fi
+
 BUILD_DIR="$PROJECT_ROOT/.build/lambda"
 ZIP_PATH="$PROJECT_ROOT/.build/lambda.zip"
-FUNCTION_NAME="SimpleFastAPILambda"
-API_NAME="SimpleFastAPIGateway"
-STAGE_NAME="local"
-REGION="sa-east-1"
+FUNCTION_NAME="${FUNCTION_NAME:-SimpleFastAPILambda}"
+API_NAME="${API_NAME:-SimpleFastAPIGateway}"
+STAGE_NAME="${STAGE_NAME:-local}"
+REGION="${REGION:-sa-east-1}"
 
 echo "==> Cleaning build directory..."
 rm -rf "$PROJECT_ROOT/.build"

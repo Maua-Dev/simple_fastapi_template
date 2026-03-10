@@ -7,3 +7,4 @@ mangum==0.21.0
 fastapi==0.135.1
 pydantic==2.12.5
 awscli-local==0.22.0
+requests

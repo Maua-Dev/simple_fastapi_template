@@ -8,3 +8,43 @@ on:
 jobs:
   testApp:
     uses: maua-dev/ci_workflows_reusable/.github/workflows/pytest_ci_311.yml@V1.2
+
+  testApiLocalStack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Start LocalStack
+        run: docker compose up -d
+
+      - name: Wait for LocalStack
+        run: |
+          echo "Waiting for LocalStack..."
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:4566/_localstack/health | grep -q running; then
+              echo "LocalStack is ready"
+              break
+            fi
+            echo "Attempt $i/30..."
+            sleep 2
+          done
+
+      - name: Deploy to LocalStack
+        run: bash iac/localstack/deploy.sh
+
+      - name: Create .env
+        run: |
+          echo "API_NAME=SimpleFastAPIGateway" > .env
+          echo "STAGE_NAME=local" >> .env
+          echo "REGION=sa-east-1" >> .env
+
+      - name: Run API integration tests
+        run: pytest tests/app/test_api.py -v
