@@ -3,8 +3,6 @@ from mangum import Mangum
 
 from .environments import Environments
 
-from .repo.item_repository_mock import ItemRepositoryMock
-
 from .errors.entity_errors import ParamNotValidated
 
 from .enums.item_type_enum import ItemTypeEnum
@@ -16,6 +14,10 @@ app = FastAPI()
 
 repo = Environments.get_item_repo()()
 
+# a baixo estão as rotas da api
+# elas interagem com os métodos de repositório. por exemplo a rota create item chama, não exclusivamente,
+# o método repo.create_item() para criar o item no nosso repositório
+
 @app.get("/items/get_all_items")
 def get_all_items():
     items = repo.get_all_items()
@@ -24,7 +26,7 @@ def get_all_items():
     }
 
 @app.get("/items/{item_id}")
-def get_item(item_id: int):
+def get_item(item_id: str):
     validation_item_id = Item.validate_item_id(item_id=item_id)
     if not validation_item_id[0]:
         raise HTTPException(status_code=400, detail=validation_item_id[1])
@@ -64,11 +66,17 @@ def create_item(request: dict):
     admin_permission = request.get("admin_permission")
     
     try:
-        item = Item(name=name, price=price, item_type=ItemTypeEnum[item_type], admin_permission=admin_permission)
+        item = Item(
+            item_id=item_id,
+            name=name,
+            price=price,
+            item_type=ItemTypeEnum[item_type],
+            admin_permission=admin_permission,
+        )
     except ParamNotValidated as err:
         raise HTTPException(status_code=400, detail=err.message)
     
-    item_response = repo.create_item(item, item_id)
+    item_response = repo.create_item(item)
     return {
         "item_id": item_id,
         "item": item_response.to_dict()    

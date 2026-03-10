@@ -56,9 +56,17 @@ class Test_Main:
             "item_type": "TOY",
             "admin_permission": False,
         }
-        with pytest.raises(HTTPException) as err:
-            create_item(request=body)
-        assert err.value.status_code == 400
+        response = create_item(request=body)
+        assert response == {
+            "item_id": self.NEW_ITEM_ID,
+            "item": {
+                "item_id": self.NEW_ITEM_ID,
+                "name": "test",
+                "price": 1.0,
+                "item_type": "TOY",
+                "admin_permission": False,
+            },
+        }
 
     def test_create_item_conflict(self):
         body = {
