@@ -49,6 +49,9 @@ def create_item(request: dict):
     if not validation_item_id[0]:
         raise HTTPException(status_code=400, detail=validation_item_id[1])
     
+    # por exemplo, dentro da rota create item, chamamos um get_item para checar se o item ja existe
+    # em nosso repositorio
+    
     item = repo.get_item(item_id)
     if item is not None:
         raise HTTPException(status_code=409, detail="Item already exists")

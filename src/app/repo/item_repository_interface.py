@@ -47,9 +47,6 @@ class IItemRepository(ABC):
         """
         Persist a new item.
 
-        The item identifier must come from the entity itself (`item.item_id`),
-        not from an external dictionary key.
-
         Args:
             item (Item): Fully validated item entity.
 
