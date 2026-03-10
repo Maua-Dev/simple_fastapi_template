@@ -12,6 +12,7 @@ API_NAME = os.environ.get("API_NAME", "SimpleFastAPIGateway")
 STAGE_NAME = os.environ.get("STAGE_NAME", "local")
 REGION = os.environ.get("REGION", "sa-east-1")
 LOCALSTACK_URL = "http://localhost:4566"
+RUN_LOCALSTACK_TESTS = os.environ.get("RUN_LOCALSTACK_TESTS", "0") == "1"
 
 
 @pytest.fixture(scope="module")
@@ -33,6 +34,10 @@ def base_url():
     return f"{LOCALSTACK_URL}/restapis/{api_id}/{STAGE_NAME}/_user_request_"
 
 
+@pytest.mark.skipif(
+    not RUN_LOCALSTACK_TESTS,
+    reason="LocalStack integration tests run only when RUN_LOCALSTACK_TESTS=1",
+)
 class TestAPI:
     EXISTING_ITEM_ID = "b11af449-22c7-43db-b0e4-dbfbbe7fdbd7"
     NON_ADMIN_ITEM_ID = "b21af449-22c7-43db-b0e4-dbfbbe7fdbd7"
