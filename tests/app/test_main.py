@@ -174,10 +174,11 @@ class Test_Main:
             delete_item(request={"item_id": self.NOT_FOUND_ITEM_ID})
         assert err.value.status_code == 404
 
-    def test_delete_item_without_admin_permission(self):
-        with pytest.raises(HTTPException) as err:
-            delete_item(request={"item_id": self.EXISTING_ADMIN_ITEM_ID})
-        assert err.value.status_code == 403
+    def test_delete_item_with_admin_flag_on_entity(self):
+        body = {"item_id": self.EXISTING_ADMIN_ITEM_ID}
+        response = delete_item(request=body)
+        assert response["item_id"] == self.EXISTING_ADMIN_ITEM_ID
+        assert response["item"]["name"] == "Super Mario Bros"
 
     def test_update_item(self):
         body = {
@@ -245,7 +246,7 @@ class Test_Main:
             update_item(request=body)
         assert err.value.status_code == 404
 
-    def test_update_item_without_admin_permission(self):
+    def test_update_item_with_admin_flag_on_entity(self):
         body = {
             "item_id": self.EXISTING_ADMIN_ITEM_ID,
             "name": "test",
@@ -253,9 +254,17 @@ class Test_Main:
             "item_type": "TOY",
             "admin_permission": False,
         }
-        with pytest.raises(HTTPException) as err:
-            update_item(request=body)
-        assert err.value.status_code == 403
+        response = update_item(request=body)
+        assert response == {
+            "item_id": self.EXISTING_ADMIN_ITEM_ID,
+            "item": {
+                "item_id": self.EXISTING_ADMIN_ITEM_ID,
+                "name": "test",
+                "price": 1.0,
+                "item_type": "TOY",
+                "admin_permission": False,
+            },
+        }
 
     def test_update_item_type_not_string(self):
         body = {
