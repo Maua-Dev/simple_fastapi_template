@@ -134,9 +134,3 @@ dmypy.json
 /.vscode/
 /.idea/
 /iac/lambda_layer_out_temp/
-
-# LocalStack
-.build/
-localstack_volume/
-iac/localstack/.api_id
-iac/localstack/.function_name

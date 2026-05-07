@@ -100,9 +100,6 @@ def delete_item(request: dict):
     if item is None:
         raise HTTPException(status_code=404, detail="Item Not found")
     
-    if item.admin_permission == True:
-        raise HTTPException(status_code=403, detail="Item Not found")
-    
     item_deleted = repo.delete_item(item_id)
     
     return {
@@ -122,10 +119,7 @@ def update_item(request: dict):
     
     if item is None:
         raise HTTPException(status_code=404, detail="Item Not found")
-    
-    if item.admin_permission == True:
-        raise HTTPException(status_code=403, detail="Item Not found")
-    
+
     name = request.get("name")
     price = request.get("price")
     admin_permission = request.get("admin_permission")
